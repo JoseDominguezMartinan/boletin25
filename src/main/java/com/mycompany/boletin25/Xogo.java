@@ -73,6 +73,7 @@ public class Xogo extends javax.swing.JFrame implements TableCellRenderer
                 "", "", ""
             }
         ));
+        tNumeros.setCellSelectionEnabled(true);
         tNumeros.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
