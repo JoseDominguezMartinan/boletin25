@@ -5,14 +5,19 @@
  */
 package com.mycompany.boletin25;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Point;
+import javax.swing.JComponent;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
  * @author jdominguezmartinan
  */
-public class Xogo extends javax.swing.JFrame
+public class Xogo extends javax.swing.JFrame implements TableCellRenderer
 {
 
     /**
@@ -21,6 +26,9 @@ public class Xogo extends javax.swing.JFrame
     public Xogo()
     {
         initComponents();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
     }
 
     /**
@@ -104,6 +112,13 @@ public class Xogo extends javax.swing.JFrame
     private void tNumerosMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tNumerosMouseClicked
     {//GEN-HEADEREND:event_tNumerosMouseClicked
         // TODO add your handling code here:
+        Point pr=this.tNumeros.getMousePosition();
+        int row=this.tNumeros.rowAtPoint(pr);
+        int colum=this.tNumeros.columnAtPoint(pr);
+        tNumeros.changeSelection(row,colum,false,false);
+        tNumeros.setSelectionForeground(Color.red);
+        //getTableCellRendererComponent(tNumeros,null,true,true,row,colum);
+        
 
     }//GEN-LAST:event_tNumerosMouseClicked
 
@@ -157,4 +172,16 @@ public class Xogo extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tNumeros;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table,Object value,boolean isSelected,boolean hasFocus,int row,int column){
+    Component c = table.getDefaultRenderer(table.getColumnClass(column))
+       .getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+    if(hasFocus)
+       ((JComponent)c).setBackground(Color.blue);//Pones el color que quieras
+
+    return c;
+    }
+    
 }
