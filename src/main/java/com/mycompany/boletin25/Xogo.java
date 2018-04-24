@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -41,38 +42,58 @@ public class Xogo extends javax.swing.JFrame implements TableCellRenderer
     private void initComponents()
     {
 
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tNumeros = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        numeroXogado = new java.awt.TextField();
+        numeroPremiado = new java.awt.TextField();
+        numero = new java.awt.TextField();
+        bComrobar = new java.awt.Button();
+        premio = new javax.swing.JLabel();
+        bLimpar = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tNumeros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
-                {"1", "2", "3"},
-                {"4", "5", "6"},
-                {"7", "8", "9"},
-                {"10", "11", "12"},
-                {"13", "14", "15"},
-                {"16", "17", "18"},
-                {"19", "20", "21"},
-                {"22", "23", "24"},
-                {"25", "26", "27"},
-                {"28", "29", "30"},
-                {"31", "32", "33"},
-                {"34", "35", "36"},
-                {"37", "38", "39"},
-                {"40", "41", "42"},
-                {"43", "44", "45"},
-                {"46", "47", "48"},
-                {"49", "/", "/"}
+                { new Integer(1),  new Integer(2),  new Integer(3)},
+                { new Integer(4),  new Integer(5),  new Integer(6)},
+                { new Integer(7),  new Integer(8),  new Integer(9)},
+                { new Integer(10),  new Integer(11),  new Integer(12)},
+                { new Integer(13),  new Integer(14),  new Integer(15)},
+                { new Integer(16),  new Integer(17),  new Integer(18)},
+                { new Integer(19),  new Integer(20),  new Integer(21)},
+                { new Integer(22),  new Integer(23),  new Integer(24)},
+                { new Integer(25),  new Integer(26),  new Integer(27)},
+                { new Integer(28),  new Integer(29),  new Integer(30)},
+                { new Integer(31),  new Integer(32),  new Integer(33)},
+                { new Integer(34),  new Integer(35),  new Integer(36)},
+                { new Integer(37),  new Integer(38),  new Integer(39)},
+                { new Integer(40),  new Integer(41),  new Integer(42)},
+                { new Integer(43),  new Integer(44),  new Integer(45)},
+                { new Integer(46),  new Integer(47),  new Integer(48)},
+                { new Integer(49), null, null}
             },
             new String []
             {
                 "", "", ""
             }
-        ));
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
+            }
+        });
         tNumeros.setCellSelectionEnabled(true);
         tNumeros.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -83,17 +104,74 @@ public class Xogo extends javax.swing.JFrame implements TableCellRenderer
         });
         jScrollPane2.setViewportView(tNumeros);
 
+        jLabel1.setText("Número xogado");
+
+        jLabel2.setText("Número premiado ");
+
+        numeroXogado.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                numeroXogadoActionPerformed(evt);
+            }
+        });
+
+        bComrobar.setLabel("comprobar");
+
+        bLimpar.setLabel("Xogar de novo");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(numeroXogado, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(numeroPremiado, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(84, 84, 84))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(premio, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(bComrobar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 128, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bComrobar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(numeroPremiado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numeroXogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(premio, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,19 +187,42 @@ public class Xogo extends javax.swing.JFrame implements TableCellRenderer
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    Integer numeroEscollido;
+    Integer numerosEscollidos[]=new Integer[6];
+    int i=0;
     private void tNumerosMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tNumerosMouseClicked
     {//GEN-HEADEREND:event_tNumerosMouseClicked
         // TODO add your handling code here:
+        try{
         Point pr=this.tNumeros.getMousePosition();
         int row=this.tNumeros.rowAtPoint(pr);
         int colum=this.tNumeros.columnAtPoint(pr);
-        tNumeros.changeSelection(row,colum,false,false);
-        tNumeros.setSelectionForeground(Color.red);
-        //getTableCellRendererComponent(tNumeros,null,true,true,row,colum);
+        numeroEscollido=(Integer) tNumeros.getValueAt(row,colum);
+        numerosEscollidos[i]=numeroEscollido;
+        i++;
+        }catch(ArrayIndexOutOfBoundsException ex){
+            JOptionPane.showMessageDialog(null,"Xa se insertaron seis numeros");
+        } 
+        for(int j=0;j<5;j++){
+            for(int k=1;k<6;k++){
+                if(numerosEscollidos[j]>numerosEscollidos[k]){
+                    numeroEscollido=numerosEscollidos[j];
+                    numerosEscollidos[j]=numerosEscollidos[k];
+                    numerosEscollidos[k]=numeroEscollido;
+                }
+            }
+        }
+        numero.setText(numerosEscollidos[0]+" "+numerosEscollidos[1]+" "+numerosEscollidos[2]+" "+numerosEscollidos[3]+" "+numerosEscollidos[4]+" "+numerosEscollidos[5]);
+       
+        
         
 
     }//GEN-LAST:event_tNumerosMouseClicked
+
+    private void numeroXogadoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_numeroXogadoActionPerformed
+    {//GEN-HEADEREND:event_numeroXogadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numeroXogadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,8 +270,17 @@ public class Xogo extends javax.swing.JFrame implements TableCellRenderer
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button bComrobar;
+    private java.awt.Button bLimpar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane2;
+    private java.awt.TextField numero;
+    private java.awt.TextField numeroPremiado;
+    private java.awt.TextField numeroXogado;
+    private javax.swing.JLabel premio;
     private javax.swing.JTable tNumeros;
     // End of variables declaration//GEN-END:variables
 
